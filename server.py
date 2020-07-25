@@ -10,6 +10,11 @@ def train():
     data = request.get_json()
     epoch = data['epoch']
 
+    # request type check
+    if type(epoch) is not int:
+        response = {'error': 'Epoch should be an integer'}
+        return jsonify(response)
+
     try:
         # create child process
         create_child()
@@ -47,6 +52,11 @@ def evaluate():
 
     data = request.get_json()
     index = data['index']
+
+    # request type check
+    if type(index) is not int:
+        response = {'error': 'Index should be an integer'}
+        return jsonify(response)
 
     try:
         # send to child
