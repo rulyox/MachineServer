@@ -9,7 +9,7 @@ fashion_mnist = keras.datasets.fashion_mnist
 (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
 
 
-def train():
+def train(epoch):
     global model
     global train_images
     global test_images
@@ -33,12 +33,12 @@ def train():
     )
 
     # train
-    model.fit(train_images, train_labels, epochs=10)
+    model.fit(train_images, train_labels, epochs=epoch)
 
     # evaluate
     test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
 
-    return 'accuracy:' + str(test_acc)
+    return 'MESSAGEaccuracy:' + str(test_acc)
 
 
 def predict(idx):
@@ -52,6 +52,7 @@ def predict(idx):
 
 def listen_input():
     while True:
+        # get index as input
         index = pipe_input()
 
         if index == '':
@@ -63,10 +64,16 @@ def listen_input():
 
 
 def main():
-    accuracy = train()
-    pipe_output(accuracy)
+    while True:
+        # get epoch as input
+        epoch = pipe_input()
 
-    listen_input()
+        result = train(int(epoch))
+
+        pipe_output(result)
+
+        # model is ready
+        listen_input()
 
 
 if __name__ == '__main__':

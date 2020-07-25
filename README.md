@@ -15,3 +15,37 @@ The server and model communicates through pipe.
 Can use any ML model. (Actually, it doesn't have to be a ML model at all.)
 
 In this example, [Basic Image Classification](https://www.tensorflow.org/tutorials/keras/classification) is used.
+
+## Web API
+
+### POST /train
+
+* Request Body JSON
+```json
+{
+    "epoch": 10
+}
+```
+
+* Response JSON
+```json
+{
+    "accuracy": "0.885200023651123"
+}
+```
+
+### POST /evaluate
+
+* Request Body JSON
+```json
+{
+    "index": 10
+}
+```
+
+* Response JSON
+```json
+{
+    "result": "Coat 92%"
+}
+```

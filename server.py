@@ -7,18 +7,29 @@ app = Flask(__name__)
 
 @app.route('/train', methods=['POST'])
 def train():
+    data = request.get_json()
+    epoch = data['epoch']
+
     try:
         # create child process
         create_child()
+
+        # send to child
+        write_child(epoch)
 
         # receive from child
         while True:
             result = read_child()
 
-            if result.startswith('accuracy:'):
+            if result.startswith('MESSAGE'):
                 enable_child()
 
-                response = {'result': result}
+                # parse result
+                result = result.replace('MESSAGE', '')
+                key = result.split(':')[0]
+                value = result.split(':')[1]
+
+                response = {key: value}
                 return jsonify(response)
 
     except Exception as e:
