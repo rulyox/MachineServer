@@ -20,6 +20,8 @@ In this example, [Basic Image Classification](https://www.tensorflow.org/tutoria
 
 ### POST /train
 
+Create child and train model.
+
 * Request Body JSON
 ```json
 {
@@ -36,6 +38,8 @@ In this example, [Basic Image Classification](https://www.tensorflow.org/tutoria
 
 ### POST /evaluate
 
+Evaluate model.
+
 * Request Body JSON
 ```json
 {
@@ -47,5 +51,16 @@ In this example, [Basic Image Classification](https://www.tensorflow.org/tutoria
 ```json
 {
     "result": "Coat 92%"
+}
+```
+
+### POST /close
+
+Close child.
+
+* Response JSON
+```json
+{
+    "result": "Child closed"
 }
 ```

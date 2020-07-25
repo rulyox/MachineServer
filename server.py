@@ -75,5 +75,27 @@ def evaluate():
         return jsonify(response)
 
 
+@app.route('/close', methods=['POST'])
+def close():
+    if not check_available():
+        response = {'error': 'Child process is not available'}
+        return jsonify(response)
+
+    try:
+        # send to child
+        write_child('')
+
+        disable_child()
+
+        response = {'result': 'Child closed'}
+        return jsonify(response)
+
+    except Exception as e:
+        disable_child()
+
+        response = {'error': str(e)}
+        return jsonify(response)
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)

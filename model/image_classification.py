@@ -55,6 +55,7 @@ def listen_input():
         # get index as input
         index = pipe_input()
 
+        # finish if empty string
         if index == '':
             break
 
@@ -67,13 +68,14 @@ def main():
     while True:
         # get epoch as input
         epoch = pipe_input()
+        break
 
-        result = train(int(epoch))
+    result = train(int(epoch))
 
-        pipe_output(result)
+    pipe_output(result)
 
-        # model is ready
-        listen_input()
+    # model is ready
+    listen_input()
 
 
 if __name__ == '__main__':
